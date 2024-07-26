@@ -38,6 +38,23 @@
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+      <el-form-item style="float: right">
+        <el-button circle title="微信登录" @click="doSocialLogin('wechat')">
+          <svg-icon icon-class="wechat" />
+        </el-button>
+        <el-button circle title="MaxKey登录" @click="doSocialLogin('maxkey')">
+          <svg-icon icon-class="maxkey" />
+        </el-button>
+        <el-button circle title="TopIam登录" @click="doSocialLogin('topiam')">
+          <svg-icon icon-class="topiam" />
+        </el-button>
+        <el-button circle title="Gitee登录" @click="doSocialLogin('gitee')">
+          <svg-icon icon-class="gitee" />
+        </el-button>
+        <el-button circle title="Github登录" @click="doSocialLogin('github')">
+          <svg-icon icon-class="github" />
+        </el-button>
+      </el-form-item>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -65,6 +82,7 @@
 import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from '@/utils/jsencrypt'
+import { authBinding } from '@/api/system/social/auth'
 
 export default {
   name: "Login",
@@ -148,6 +166,16 @@ export default {
               this.getCode();
             }
           });
+        }
+      });
+    },
+    doSocialLogin(type){
+      authBinding(type, loginForm.username).then((res) => {
+        if (res.code === HttpStatus.SUCCESS) {
+          // 获取授权地址跳转
+          window.location.href = res.data;
+        } else {
+          this.$message.error(res.msg);
         }
       });
     }
