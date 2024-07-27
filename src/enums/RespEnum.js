@@ -1,4 +1,5 @@
-const  HttpStatus= {
+
+export const HttpStatus= {
   /**
    * 操作成功
    */

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-const clientId = import.meta.env.VITE_APP_CLIENT_ID;
+const clientId = process.env["VITE_APP_CLIENT_ID "];
 
 // 登录方法
 export function login(username, password, code, uuid) {
@@ -67,14 +67,14 @@ export function getCodeImg() {
  * 第三方登录
  */
 export function callback(data) {
-  const LoginData = {
-    ...data,
+  var loginData = {
+    data,
     clientId: clientId,
     grantType: 'social'
   };
   return request({
     url: '/auth/social/callback',
     method: 'post',
-    data: LoginData
+    data: loginData
   });
 }

@@ -42,8 +42,8 @@
         <el-button circle title="微信登录" @click="doSocialLogin('wechat')">
           <svg-icon icon-class="wechat" />
         </el-button>
-        <el-button circle title="MaxKey登录" @click="doSocialLogin('maxkey')">
-          <svg-icon icon-class="maxkey" />
+        <el-button circle title="支付宝登录" @click="doSocialLogin('alipay_wallet')">
+          <svg-icon icon-class="alipay_wallet" />
         </el-button>
         <el-button circle title="TopIam登录" @click="doSocialLogin('topiam')">
           <svg-icon icon-class="topiam" />
@@ -83,6 +83,7 @@ import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from '@/utils/jsencrypt'
 import { authBinding } from '@/api/system/social/auth'
+import { HttpStatus } from '@/enums/RespEnum'
 
 export default {
   name: "Login",
@@ -109,7 +110,7 @@ export default {
       // 验证码开关
       captchaEnabled: true,
       // 注册开关
-      register: false,
+      register: true,
       redirect: undefined
     };
   },
@@ -170,10 +171,12 @@ export default {
       });
     },
     doSocialLogin(type){
-      authBinding(type, loginForm.username).then((res) => {
+      authBinding(type, this.loginForm.username).then((res) => {
         if (res.code === HttpStatus.SUCCESS) {
           // 获取授权地址跳转
-          window.location.href = res.data;
+          console.log(res.msg)
+          alert(res.msg)
+          window.location.href = res.msg;
         } else {
           this.$message.error(res.msg);
         }

@@ -5,7 +5,6 @@
 <script>
 import { login, callback } from '@/api/login';
 import { setToken, getToken } from '@/utils/auth';
-import { LoginData } from '@/api/types';
 
 export default {
   name: "SocialCallback",
@@ -38,13 +37,13 @@ export default {
       }
       this.$message.success(res.msg);
       setTimeout(() => {
-        location.href = import.meta.env.VITE_APP_CONTEXT_PATH + 'index';
+        location.href =process.env.VITE_APP_CONTEXT_PATH + 'index';
       }, 2000);
     },
     handleError(error){
       this.$message.error(error.message);
       setTimeout(() => {
-        location.href = import.meta.env.VITE_APP_CONTEXT_PATH + 'index';
+        location.href = process.env.VITE_APP_CONTEXT_PATH + 'index';
       }, 2000);
     },
     async callbackByCode(data){
@@ -68,6 +67,7 @@ export default {
     async init(){
       // 如果域名不相等 则重定向处理
       let host = window.location.host;
+      console.log(this.domain,host)
       if (this.domain !== host) {
         let urlFull = new URL(window.location.href);
         urlFull.host = this.domain;
@@ -80,7 +80,7 @@ export default {
         socialState: this.state,
         tenantId: this.tenantId,
         source: this.source,
-        clientId: import.meta.env.VITE_APP_CLIENT_ID,
+        clientId: process.env.VITE_APP_CLIENT_ID,
         grantType: 'social'
       };
 
