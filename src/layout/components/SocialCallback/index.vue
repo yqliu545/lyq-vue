@@ -12,12 +12,12 @@ export default {
     return {
       loading: true,
       route:this.$route.query,
-      code:this.$route.query.code,
+      code:this.$route.query.auth_code,
       state:this.$route.query.state,
       source:this.$route.query.source,
-      stateJson:JSON.parse(atob(state)),
+      // stateJson:JSON.parse(atob(state)),
       tenantId:"",
-      domain:this.stateJson.domain,
+      // domain:this.stateJson.domain,
     };
   },
   created() {
@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     async processResponse(res){
+      console.log("res",res)
       if (res.code !== 200) {
         throw new Error(res.msg);
       }
@@ -68,23 +69,24 @@ export default {
       // 如果域名不相等 则重定向处理
       let host = window.location.host;
       console.log(this.domain,host)
-      if (this.domain !== host) {
-        let urlFull = new URL(window.location.href);
-        urlFull.host = this.domain;
-        window.location.href = urlFull.toString();
-        return;
-      }
+      console.log(this.source)
+      // if (this.domain !== host) {
+      //   let urlFull = new URL(window.location.href);
+      //   urlFull.host = this.domain;
+      //   window.location.href = urlFull.toString();
+      //   return;
+      // }
 
       var data = {
         socialCode: this.code,
         socialState: this.state,
         tenantId: this.tenantId,
-        source: this.source,
+        source: this.source[0],
         clientId: process.env.VITE_APP_CLIENT_ID,
         grantType: 'social'
       };
 
-      if (!getToken()) {
+      if (getToken()) {
         await this.loginByCode(data);
       } else {
         await this.callbackByCode(data);

@@ -67,14 +67,16 @@ export function getCodeImg() {
  * 第三方登录
  */
 export function callback(data) {
-  var loginData = {
-    data,
-    clientId: clientId,
-    grantType: 'social'
-  };
+  // var loginData = {
+  //   data,
+  //   clientId: clientId,
+  //   grantType: 'social'
+  // };
+  data.grantType='social';
+  data.clientId=clientId;
   return request({
     url: '/auth/social/callback',
     method: 'post',
-    data: loginData
+    data: data
   });
 }
