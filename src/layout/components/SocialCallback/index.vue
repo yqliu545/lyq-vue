@@ -86,7 +86,7 @@ export default {
         grantType: 'social'
       };
 
-      if (getToken()) {
+      if (!getToken()) {
         await this.loginByCode(data);
       } else {
         await this.callbackByCode(data);
