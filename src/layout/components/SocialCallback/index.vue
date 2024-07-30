@@ -58,7 +58,7 @@ export default {
     },
     async loginByCode(data){
       try {
-        const res = await login(data);
+        const res = await login2(data);
         await this.processResponse(res);
         this.loading = false;
       } catch (error) {

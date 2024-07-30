@@ -14,6 +14,20 @@ export function login(username, password, code, uuid) {
   })
 }
 
+// 登录方法
+export function login2(data) {
+  return request({
+    url: '/auth/social/login',
+    headers: {
+      isToken: false,
+      repeatSubmit: false
+    },
+    method: 'post',
+    data: data
+  })
+}
+
+
 // 注册方法
 export function register(data) {
   return request({
