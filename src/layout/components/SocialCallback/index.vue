@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { login, callback } from '@/api/login';
+import { login, callback,login2 } from '@/api/login';
 import { setToken, getToken } from '@/utils/auth';
 
 export default {
