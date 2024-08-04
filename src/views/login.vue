@@ -174,8 +174,6 @@ export default {
       authBinding(type, this.loginForm.username).then((res) => {
         if (res.code === HttpStatus.SUCCESS) {
           // 获取授权地址跳转
-          console.log(res.msg)
-          alert(res.msg)
           window.location.href = res.msg;
         } else {
           this.$message.error(res.msg);

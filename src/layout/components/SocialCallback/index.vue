@@ -36,15 +36,15 @@ export default {
       if (res.data !== null) {
         setToken(res.data.access_token);
       }
-      this.$message.success(res.msg);
+      this.$message.success("成功登录");
       setTimeout(() => {
-        location.href =process.env.VITE_APP_CONTEXT_PATH + 'index';
-      }, 2000);
+        this.$router.push({name:"Index"})
+      }, 1000);
     },
     handleError(error){
       this.$message.error(error.message);
       setTimeout(() => {
-        location.href = process.env.VITE_APP_CONTEXT_PATH + 'index';
+        this.$router.push({name:"Index"})
       }, 2000);
     },
     async callbackByCode(data){
@@ -68,8 +68,8 @@ export default {
     async init(){
       // 如果域名不相等 则重定向处理
       let host = window.location.host;
-      console.log(this.domain,host)
-      console.log(this.source)
+      // console.log(this.domain,host)
+      // console.log(this.source)
       // if (this.domain !== host) {
       //   let urlFull = new URL(window.location.href);
       //   urlFull.host = this.domain;
