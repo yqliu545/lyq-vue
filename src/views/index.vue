@@ -7,33 +7,6 @@
 <!--            <span>联系信息</span>-->
 <!--          </div>-->
           <div class="body">
-<!--            <p>-->
-<!--              <i class="el-icon-s-promotion"></i> 官网：<el-link-->
-<!--                href="http://www.ruoyi.vip"-->
-<!--                target="_blank"-->
-<!--                >http://www.ruoyi.vip</el-link-->
-<!--              >-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              <i class="el-icon-user-solid"></i> QQ群： <s> 满42799195 </s>  <s> 满170157040 </s>-->
-<!--              <s> 满130643120 </s> <s> 满225920371 </s> <s> 满201705537 </s> <s> 满236543183 </s>-->
-<!--              <s> 满213618602 </s> <s> 满148794840 </s> <s> 满118752664 </s> <s> 满101038945 </s>-->
-<!--              <s> 满128355254 </s> <s> 满179219821 </s> <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=Z6j1amUmIPBXamuZzxpwjY8GwaP45XB6&authKey=zfSnxECfnScfY1HLCWilSqCq%2BmSVtr%2Bi%2F4oXeBcuQVwlq6XlrAfbZ0awp3%2B4Bdec&noverify=0&group_code=158753145" target="_blank">158753145</a>-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              <i class="el-icon-chat-dot-round"></i> 微信：<a-->
-<!--                href="javascript:;"-->
-<!--                >/ *若依</a-->
-<!--              >-->
-<!--            </p>-->
-<!--            <p>-->
-<!--              <i class="el-icon-money"></i> 支付宝：<a-->
-<!--                href="javascript:;"-->
-<!--                class="支付宝信息"-->
-<!--                >/ *若依</a-->
-<!--              >-->
-<!--            </p>-->
-
             <p>一个笑话</p>
             <p>价格：{{ price }}￥</p>
             <el-button @click="buy()">立即购买</el-button>
@@ -41,19 +14,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-dialog :visible.sync="dialogFormVisible" :before-close="cancelOrder" :modal="true" :close-on-click-modal="false" style="width:800px;margin:0px auto;" >
-      <h1 style="font-size:30px;color:#00B38A" >微信扫一扫支付</h1>
-      <img id="qrcode" :src="wxpayUrl">
-      <h2 id="statusText"></h2>
-      <p id="closeText"></p>
-    </el-dialog>
-    <el-dialog title="支付" :visible.sync="alipay" width="1500px" >
-      <div ref="formRef" style="width: 1000px;height: 800px" v-html="aliform"></div>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="alipay = false">取 消</el-button>
-        <el-button type="primary" @click="alipay = false">确 定</el-button>
-      </div>
-    </el-dialog>
+    <div ref="formRef" style="width: 1000px;height: 800px" v-html="aliform"></div>
   </div>
 </template>
 
