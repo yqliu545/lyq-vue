@@ -15,6 +15,9 @@
       </el-col>
     </el-row>
     <div ref="formRef" style="width: 1000px;height: 800px" v-html="aliform"></div>
+    <div>账号:tlpskv1907@sandbox.com</div>
+    <div>登录密码:111111</div>
+    <div>支付密码:111111</div>
   </div>
 </template>
 
