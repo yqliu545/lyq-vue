@@ -47,6 +47,13 @@
       <h2 id="statusText"></h2>
       <p id="closeText"></p>
     </el-dialog>
+    <el-dialog title="支付" :visible.sync="alipay" width="1500px" >
+      <div ref="formRef" style="width: 1000px;height: 800px" v-html="aliform"></div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="alipay = false">取 消</el-button>
+        <el-button type="primary" @click="alipay = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -58,9 +65,10 @@ export default {
   data() {
     return {
       dialogFormVisible:false,
+      alipay:false,
+      aliform:"",
       wxpayUrl:"",
-      // 版本号
-      version: "3.6.4",
+      orderCode:'',
       price:0.01,
       number:1,
       sumPrice:0,
@@ -70,7 +78,7 @@ export default {
   },
   methods: {
     buy() {
-      this.dialogFormVisible=true;
+      this.alipay=true;
       var data={
         merchandiseId:this.merchandiseId,
         sumPrice:this.number*this.price,
@@ -78,8 +86,20 @@ export default {
         number:this.number,
       }
       buyjoker(data).then(res=>{
-        this.wxpayUrl="http://localhost:8080/pay/alipay/code?url="+res.data.code_url;
-        this.checkOrder(res.data.trade_no);
+        // this.wxpayUrl="http://localhost:8080/pay/alipay/code?url="+res.data.code_url;
+        console.log(res.data)
+        this.aliform=res.data;
+        // const newWindow = window.open('', '_self');
+        // newWindow.document.write(res.data);
+        // newWindow.focus();
+        this.$nextTick(() => {
+          // 获取订单详情来轮询支付结果
+          // this.checkOrder();
+          console.log(document.forms);  //跳转之前,可以先打印看看forms,确保后台数据和forms正确,否则，可能会出现一些奇奇怪怪的问题 ╮(╯▽╰)╭
+          document.forms[0].submit();  //重点--这个才是跳转页面的核心,获取第一个表单并提交
+        });
+        // form.innerHTML="<p>张三</p>"
+        // this.checkOrder(res.data.trade_no);
       })
     },
     cancelOrder(){
@@ -87,7 +107,27 @@ export default {
     },
     //检查订单状态
     checkOrder(){
+      clearTimeout(this.timer);
+      this.timer =setTimeout(()=>{
+        let initTime = +new Date();
+        let loop =()=>{
+          checkOrder({orderCode:this.orderCode}).then((res)=>{
+            //支付成功操作
+            if (res.data.code == 200){
 
+            }else {
+              let now = +new Date();
+              if (now - initTime < 45000) {
+                loop();
+              } else {
+                // 超时按照失败处理
+                //支付失败的结果
+              }
+            }
+          })
+        }
+        loop();
+      },500)
     },
   },
 };
