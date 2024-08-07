@@ -14,8 +14,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <div ref="formRef" style="width: 1000px;height: 800px" v-html="aliform"></div>
-    <div>账号:tlpskv1907@sandbox.com</div>
+    <div style="font-size: xxx-large">账号:<span style="color: #a95812;margin-left: 20px;">tlpskv1907@sandbox.com</span></div>
     <div>登录密码:111111</div>
     <div>支付密码:111111</div>
   </div>
@@ -28,16 +27,11 @@ export default {
   name: "Index",
   data() {
     return {
-      dialogFormVisible:false,
-      alipay:false,
-      aliform:"",
-      wxpayUrl:"",
       orderCode:'',
       price:0.01,
       number:1,
       sumPrice:0,
       merchandiseId:1,
-
     };
   },
   methods: {
@@ -51,20 +45,6 @@ export default {
       }
       buyjoker(data).then(res=>{
         document.write(res.data);
-        // this.wxpayUrl="http://localhost:8080/pay/alipay/code?url="+res.data.code_url;
-        // console.log(res.data)
-        // this.aliform=res.data;
-        // const newWindow = window.open('', '_self');
-        // newWindow.document.write(res.data);
-        // newWindow.focus();
-        // this.$nextTick(() => {
-        //   // 获取订单详情来轮询支付结果
-        //   // this.checkOrder();
-        //   console.log(document.forms);  //跳转之前,可以先打印看看forms,确保后台数据和forms正确,否则，可能会出现一些奇奇怪怪的问题 ╮(╯▽╰)╭
-        //   document.forms[0].submit();  //重点--这个才是跳转页面的核心,获取第一个表单并提交
-        // });
-        // form.innerHTML="<p>张三</p>"
-        // this.checkOrder(res.data.trade_no);
       })
     },
     cancelOrder(){
