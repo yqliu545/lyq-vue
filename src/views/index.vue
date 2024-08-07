@@ -86,18 +86,19 @@ export default {
         number:this.number,
       }
       buyjoker(data).then(res=>{
+        document.write(res.data);
         // this.wxpayUrl="http://localhost:8080/pay/alipay/code?url="+res.data.code_url;
-        console.log(res.data)
-        this.aliform=res.data;
+        // console.log(res.data)
+        // this.aliform=res.data;
         // const newWindow = window.open('', '_self');
         // newWindow.document.write(res.data);
         // newWindow.focus();
-        this.$nextTick(() => {
-          // 获取订单详情来轮询支付结果
-          // this.checkOrder();
-          console.log(document.forms);  //跳转之前,可以先打印看看forms,确保后台数据和forms正确,否则，可能会出现一些奇奇怪怪的问题 ╮(╯▽╰)╭
-          document.forms[0].submit();  //重点--这个才是跳转页面的核心,获取第一个表单并提交
-        });
+        // this.$nextTick(() => {
+        //   // 获取订单详情来轮询支付结果
+        //   // this.checkOrder();
+        //   console.log(document.forms);  //跳转之前,可以先打印看看forms,确保后台数据和forms正确,否则，可能会出现一些奇奇怪怪的问题 ╮(╯▽╰)╭
+        //   document.forms[0].submit();  //重点--这个才是跳转页面的核心,获取第一个表单并提交
+        // });
         // form.innerHTML="<p>张三</p>"
         // this.checkOrder(res.data.trade_no);
       })
