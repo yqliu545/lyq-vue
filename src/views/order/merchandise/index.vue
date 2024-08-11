@@ -25,9 +25,9 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="商品属性" prop="attribute">
+      <el-form-item label="商品属性" prop="shuxing">
         <el-input
-          v-model="queryParams.attribute"
+          v-model="queryParams.shuxing"
           placeholder="请输入商品属性"
           clearable
           @keyup.enter.native="handleQuery"
@@ -41,10 +41,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="数量" prop="stock">
+      <el-form-item label="库存" prop="stock">
         <el-input
           v-model="queryParams.stock"
-          placeholder="请输入数量"
+          placeholder="请输入库存"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -111,13 +111,10 @@
       <el-table-column label="商品名称" align="center" prop="name"/>
       <el-table-column label="商品类型" align="center" prop="type"/>
       <el-table-column label="商品分类id" align="center" prop="categoryId"/>
-      <el-table-column label="商品属性" align="center" prop="
-
-attribute"
-      />
+      <el-table-column label="商品属性" align="center" prop="shuxing"/>
       <el-table-column label="价格" align="center" prop="price"/>
       <el-table-column label="商品状态1在售2下架" align="center" prop="status"/>
-      <el-table-column label="数量" align="center" prop="stock"/>
+      <el-table-column label="库存" align="center" prop="stock"/>
       <el-table-column label="主图地址" align="center" prop="mainImage" width="100">
         <template slot-scope="scope">
           <image-preview :src="scope.row.mainImage" :width="50" :height="50"/>
@@ -167,14 +164,17 @@ attribute"
         <el-form-item label="商品分类id" prop="categoryId">
           <el-input v-model="form.categoryId" placeholder="请输入商品分类id"/>
         </el-form-item>
-        <el-form-item label="商品属性" prop="attribute">
-          <el-input v-model="form.attribute" placeholder="请输入商品属性"/>
+        <el-form-item label="商品属性" prop="shuxing">
+          <el-input v-model="form.shuxing" placeholder="请输入商品属性"/>
         </el-form-item>
         <el-form-item label="价格" prop="price">
           <el-input v-model="form.price" placeholder="请输入价格"/>
         </el-form-item>
-        <el-form-item label="数量" prop="stock">
-          <el-input v-model="form.stock" placeholder="请输入数量"/>
+        <el-form-item label="单位" prop="unit">
+          <el-input v-model="form.unit" placeholder="请输入单位"/>
+        </el-form-item>
+        <el-form-item label="库存" prop="stock">
+          <el-input v-model="form.stock" placeholder="请输入库存"/>
         </el-form-item>
         <el-form-item label="主图地址" prop="mainImage">
           <image-upload v-model="form.mainImage"/>
@@ -233,7 +233,7 @@ export default {
         type: null,
         categoryId: null,
 
-        attribute: null,
+        shuxing: null,
         price: null,
         status: null,
         stock: null,
@@ -251,7 +251,7 @@ export default {
           { required: true, message: '价格不能为空', trigger: 'blur' }
         ],
         stock: [
-          { required: true, message: '数量不能为空', trigger: 'blur' }
+          { required: true, message: '库存不能为空', trigger: 'blur' }
         ]
       }
     }
@@ -282,7 +282,7 @@ export default {
         type: null,
         categoryId: null,
 
-        attribute: null,
+        shuxing: null,
         price: null,
         status: null,
         stock: null,

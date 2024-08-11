@@ -1,54 +1,65 @@
 <template>
   <div class="app-container home">
-    <el-row :gutter="20">
+    <el-row :gutter="20" v-for="(item,index) in merchandiseList" :key="item.index">
       <el-col :xs="24" :sm="24" :md="12" :lg="24">
-        <el-card class="update-log">
+        <el-card class="update-log" >
 <!--          <div slot="header" class="clearfix">-->
 <!--            <span>联系信息</span>-->
 <!--          </div>-->
           <div class="body">
-            <p>一个笑话</p>
-            <p>价格：{{ price }}￥</p>
-            <el-button @click="buy()">立即购买</el-button>
+            <p>{{ item.name }}</p>
+            <p>价格：{{ item.price }}￥</p>
+            <el-button @click="buy(item)">立即购买</el-button>
           </div>
         </el-card>
       </el-col>
     </el-row>
     <div style="font-size: xxx-large">账号:<span style="color: #a95812;margin-left: 20px;">tlpskv1907@sandbox.com</span></div>
-    <div>登录密码:111111</div>
-    <div>支付密码:111111</div>
+<!--    <div>登录密码:111111</div>-->
+<!--    <div>支付密码:111111</div>-->
   </div>
 </template>
 
 <script>
 import {buyjoker} from "@/api";
-
+import {listMerchandise} from "@/api/order/merchandise";
 export default {
   name: "Index",
   data() {
     return {
-      orderCode:'',
       price:0.01,
       number:1,
-      sumPrice:0,
+      payment:0,
       merchandiseId:1,
+      // 商品表格数据
+      merchandiseList: [],
+      queryParams: {
+        pageNum: 1,
+        pageSize: 10,
+        name: null,
+        type: null,
+        categoryId: null,
+        price: null,
+        status: "1",
+      },
     };
   },
+  mounted() {
+    this.getList();
+  },
   methods: {
-    buy() {
-      this.alipay=true;
-      var data={
-        merchandiseId:this.merchandiseId,
-        sumPrice:this.number*this.price,
-        price:this.price,
-        number:this.number,
-      }
-      buyjoker(data).then(res=>{
-        document.write(res.data);
-      })
-    },
-    cancelOrder(){
-
+    buy(item) {
+      console.log(item.merchandiseId)
+      this.$router.push({ path: '/merchandiseDetail',query:{merchandiseId:item.merchandiseId} })
+      // this.alipay=true;
+      // var data={
+      //   merchandiseId:item.merchandiseId,
+      //   payment:this.number*item.price,
+      //   number:this.number,
+      // }
+      // buyjoker(data).then(res=>{
+      //   document.write(res.data);
+      // })
     },
     //检查订单状态
     checkOrder(){
@@ -73,6 +84,12 @@ export default {
         }
         loop();
       },500)
+    },
+    getList() {
+      listMerchandise(this.queryParams).then(response => {
+        this.merchandiseList = response.rows
+        console.log("商品：",this.merchandiseList)
+      })
     },
   },
 };

@@ -47,6 +47,11 @@ export const constantRoutes = [
     component: () => import('@/layout/components/SocialCallback/index.vue')
   },
   {
+    path: '/merchandiseDetail',
+    hidden: true,
+    component: () => import('@/layout/components/Buy/index.vue')
+  },
+  {
     path: '/login',
     component: () => import('@/views/login'),
     hidden: true
