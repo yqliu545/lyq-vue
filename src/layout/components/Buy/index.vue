@@ -44,7 +44,8 @@
 
     </div>
   </el-card>
-  <el-button class="bottom-right-button" size="medium" style="background-color: red;color: white" @click="buy"><i class="el-icon-wallet">直接购买</i></el-button>
+  <el-button class="bottom-right-button" size="medium" style="background-color: red;color: white" @click="open"><i class="el-icon-wallet">直接购买</i></el-button>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
 </div>
 </template>
 
@@ -96,16 +97,33 @@ export default {
         this.$message.success("加入购物车成功")
       });
     },
-    buy() {
+    buy(iphoneNum) {
+      //确定是否有电话号码
       var data={
         merchandiseId:this.merchandiseId,
         payment:this.form.num*this.merchandise.price,
-        number:this.number,
+        numbers:this.number,
+        iphone:iphoneNum,
       }
       buyjoker(data).then(res=>{
         document.write(res.data);
       })
     },
+    open() {
+      this.$prompt('请输入手机号', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
+        inputErrorMessage: '手机格式不正确'
+      }).then(({ value }) => {
+        this.buy(value)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    }
   },
 }
 </script>
@@ -117,7 +135,7 @@ export default {
 }
 .bottom-right-button{
   /*position: absolute;*/
-  margin-top:150px ;
+  margin-top:120px ;
   margin-left: 90%;
   bottom: 10px;
 }

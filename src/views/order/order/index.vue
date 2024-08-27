@@ -25,9 +25,9 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="购买数量" prop="number">
+      <el-form-item label="购买数量" prop="numbers">
         <el-input
-          v-model="queryParams.number"
+          v-model="queryParams.numbers"
           placeholder="请输入购买数量"
           clearable
           @keyup.enter.native="handleQuery"
@@ -115,7 +115,7 @@
       <el-table-column label="订单编号" align="center" prop="orderNo" />
       <el-table-column label="商品id" align="center" prop="merchandiseId" />
       <el-table-column label="购买人id" align="center" prop="userId" />
-      <el-table-column label="购买数量" align="center" prop="number" />
+      <el-table-column label="购买数量" align="center" prop="numbers" />
       <el-table-column label="实际消费金额" align="center" prop="payment" />
       <el-table-column label="是否支付1.已支付，0未支付,-1订单取消，2交易成功" align="center" prop="status" />
       <el-table-column label="支付类型 1在线支付" align="center" prop="paymentType" />
@@ -149,7 +149,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -170,8 +170,11 @@
         <el-form-item label="购买人id" prop="userId">
           <el-input v-model="form.userId" placeholder="请输入购买人id" />
         </el-form-item>
-        <el-form-item label="购买数量" prop="number">
-          <el-input v-model="form.number" placeholder="请输入购买数量" />
+        <el-form-item label="购买数量" prop="numbers">
+          <el-input v-model="form.numbers" placeholder="请输入购买数量" />
+        </el-form-item>
+        <el-form-item label="手机号" prop="iphone">
+          <el-input v-model="form.iphone" placeholder="请输入手机号" />
         </el-form-item>
         <el-form-item label="实际消费金额" prop="payment">
           <el-input v-model="form.payment" placeholder="请输入实际消费金额" />
@@ -280,7 +283,7 @@ export default {
         orderNo: null,
         merchandiseId: null,
         userId: null,
-        number: null,
+        numbers: null,
         payment: null,
         status: null,
         paymentType: null,
@@ -291,7 +294,7 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        number: [
+        numbers: [
           { required: true, message: "购买数量不能为空", trigger: "blur" }
         ],
         status: [
@@ -325,7 +328,7 @@ export default {
         orderNo: null,
         merchandiseId: null,
         userId: null,
-        number: null,
+        numbers: null,
         payment: null,
         status: null,
         paymentType: null,
