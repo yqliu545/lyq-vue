@@ -45,7 +45,7 @@
     </div>
   </el-card>
   <el-button class="bottom-right-button" size="medium" style="background-color: red;color: white" @click="open"><i class="el-icon-wallet">直接购买</i></el-button>
-  <el-button type="text" @click="open">点击打开 Message Box</el-button>
+<!--  <el-button type="text" @click="open"></el-button>-->
 </div>
 </template>
 

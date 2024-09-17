@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">刘玉琦系统</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -73,7 +73,9 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span>
+      <img src="@/assets/images/beian.png" alt="" height="13px" width="11px"><a href="" rel="noreferrer" style="margin: auto" target="_blank">京公网安备11010802044777</a>
+      <span style="margin-left: 10px">冀ICP备2024080816-1</span>
+      <span style="margin-left: 30px">Copyright © 2018-2024 liuyuqi All Rights Reserved.</span>
     </div>
   </div>
 </template>
@@ -190,7 +192,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-image: url("../assets/images/login-background.jpg");
+  background-image: url("../assets/images/login-1920.png");
   background-size: cover;
 }
 .title {
@@ -240,7 +242,7 @@ export default {
   color: #fff;
   font-family: Arial;
   font-size: 12px;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
 }
 .login-code-img {
   height: 38px;

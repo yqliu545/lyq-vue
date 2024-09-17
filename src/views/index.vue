@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     buy(item) {
-      console.log(item.merchandiseId)
       this.$router.push({ path: '/merchandiseDetail',query:{merchandiseId:item.merchandiseId} })
       // this.alipay=true;
       // var data={
